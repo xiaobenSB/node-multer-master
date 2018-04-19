@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+ 
+<body>
+ <form action="http://127.0.0.1:3300/a" method="POST" enctype="multipart/form-data"> <!--enctype="multipart/form-data" 用表单上传时必须-->
+  <input type="file" id="file" accept="image/*" name="myfile"><!--在文件上传中使用 accept 属性,可以限制上传格式，这里是设的所有：-->
+  <div id="result"></div>
+  <img src="" alt="" id="img" width="40" height="40">
+  <input type="submit" value="提交" />
+ </form>
+ <img src="1523953021148.png" />
+  <script>
+    let file = document.getElementById('file');
+    /*file.onchange = function (e) {  //这个是为了不让它跳转并接收数据
+     let file = e.target.files[0];  //这里存放的是上传文件的所有信息
+     let xhr = new XMLHttpRequest();
+      let fd = new FormData();  //这个html5的方法
+      fd.append('myfile', file)  //可以把上传数据打包，第一个：name 第二个：文件信息
+      xhr.open('post', 'http://127.0.0.1:3300/a')
+      xhr.onload = function () {
+        // console.log(xhr)
+        if (xhr.status === 200) {
+          let data = xhr.responseText;
+          document.getElementById('result').innerHTML = data;
+        }
+      }
+      xhr.send(fd)
+    }*/
+  </script>
+</body>
+ 
+</html>
+
+
+
+<!--
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>百度语音测试</title>
+		<script type="text/javascript"> 
+		function doTTS(){
+			var ttsDiv = document.getElementById('bdtts_div_id');
+			var ttsAudio = document.getElementById('tts_autio_id');
+			var ttsText = document.getElementById('ttsText').value;
+			
+			// 这样为什么替换不了播放内容
+			/*var ssrcc = 'http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=10&text='+ttsText;
+			document.getElementById('tts_source_id').src=ssrcc;*/
+			
+			// 这样就可实现播放内容的替换了
+			ttsDiv.removeChild(ttsAudio);
+			var au1 = '<audio id="tts_autio_id" autoplay="autoplay">';
+			var sss = '<source id="tts_source_id" src="http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=5&text='+ttsText+'" type="audio/mpeg">';
+			var eee = '<embed id="tts_embed_id" height="0" width="0" src="">';
+			var au2 = '</audio>';
+			ttsDiv.innerHTML = au1 + sss + eee + au2;
+			
+			ttsAudio = document.getElementById('tts_autio_id');
+			
+			ttsAudio.play();
+		}
+		</script>
+	</head>
+	<body>
+		<div>
+			<input type="text" id="ttsText">
+			<input type="button" id="tts_btn" onclick="doTTS()" value="播放">
+		</div>
+		<div id="bdtts_div_id">
+			<audio id="tts_autio_id" controls>
+				<source id="tts_source_id" src="http://tts.baidu.com/text2audio?lan=zh&ie=UTF-8&spd=9&text=播报内容" type="audio/mpeg">
+			
+			</audio>
+		</div>
+	</body>
+</html>
+
+-->
+
