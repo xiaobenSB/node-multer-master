@@ -63,7 +63,7 @@ app.use(function(err,req,res){ //因为发送请求不是你这里发的,你只�
 });
 
 
-var server=http.createServer(app).listen(process.env.POR||8800);  //process.env.POR  window下 process.env == set 后面可以任意名process.env.xxx == set xxx
+var server=http.createServer(app).listen(process.env.POR||8800);  //process.env.POR  window下 process.env == set 后面可以任意名process.env.xxx == set xxx =端口
 
 //监听当前控制台触发事件
 process.on('uncaughtException', function (err) {  //拦截控制台的报错信息并处理，防止退出 虽然不会退出但错误语句后面也不执行
