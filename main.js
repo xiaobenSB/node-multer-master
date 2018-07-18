@@ -26,7 +26,7 @@ app.all('*', function(req, res, next) {  //all是匹配当前所有 use是匹配
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     res.header("Content-Type", "application/json;charset=utf-8");
 	 }
-    next();
+    next();  //注意这一步不是在else里的，不然当上面匹配时会无限执行
 });
 
 //app.use(express.static("public"));
