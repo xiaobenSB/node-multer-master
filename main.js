@@ -7,7 +7,7 @@ var multer = require("multer");
 
 var storage = multer.diskStorage({
   destination: function (req,file,cb){
-     cb(null,"public/");
+     cb(null,"public/");   //注意这里路径的是  ./public或public/ 不然/public会保错
    },
   filename: function (req,file,cb) {  //用时间来防止重名
      cb(null,Date.now()+".png");
