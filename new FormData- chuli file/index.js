@@ -1,8 +1,7 @@
 
 var http = require('http');
 const fs = require('fs');
-const zlib = require('zlib');//注意不能同时操作zlib.createxxxx()方法，必须等先开始的执行结束再执行
-const file = process.argv[2];  //对应node  xx.js （这里）
+
 
 
 
@@ -19,7 +18,6 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
-//编译成gzip时做了编码记号，当用gzip编码解析时会解析成编码记号的编码 on是先注册让返回的pipe方法触发，pipe里面是空数据就不会触发大部分on注册的方法
 
 http.createServer(function(request, response) {
   if(request.url==="/b"){
