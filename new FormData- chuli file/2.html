@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+</head>
+<body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<div>
+  <video width="400" height="500" controls="controls">
+  </video>
+</div>
+
+<input type="file" accept="image/*" />
+<script type="text/javascript">
+
+$("input").change(function(){
+
+  var files = this.files;
+
+  if(!files.length) {
+
+    return;
+
+  }
+
+
+  var fd = new FormData();
+  fd.append('name', 'www');
+fd.append('myfile', this.files[0]);
+$.ajax({
+    type: 'POST',
+    url: '/b',
+    data: fd,
+    processData: false,
+    contentType: false
+}).done(function(data) {
+       console.log(data);
+});
+
+});
+
+</script>
+
+
+</body>
+
+</html>
