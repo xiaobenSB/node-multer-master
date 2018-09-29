@@ -29,12 +29,12 @@ new  FormData() 方法可以使Blob对象数据上传到后台
                 return res.end('wrong');
             }
             var busboy = new Busboy({ headers: req.headers });
-            busboy.on('file', function (fieldname, file, filename, encoding, mimetype) {
+            busboy.on('file', function (fieldname, file, filename, encoding, mimetype) { //前台上传文件数据处理后回调参数
                 console.log(filename)
                 let writeStream = fs.createWriteStream('./upload/' + filename);
 
                 //监听data事件，接收传过来的文件，如果文件过大，此事件将会执行多次，此方法必须写在file方法里
-                file.on('data', function (data) {
+                file.on('data', function (data) {  //获取处理的上传数据
                     writeStream.write(data);
                     console.log(data);
                 })
@@ -44,6 +44,9 @@ new  FormData() 方法可以使Blob对象数据上传到后台
                     writeStream.end();
                 });
 
+            });
+             busboy.on('field', function (fieldname, val, fieldnameTruncated, valTruncated, encoding, mimetype) {  //处理前台传过来对象格式的数据如（name : value）后执行回调并传递参数
+                console.log('Field [' + fieldname + ']: value: ' + inspect(val));
             });
             busboy.on('finish', function () {
                 res.writeHead(200, { 'Connection': 'close' });
