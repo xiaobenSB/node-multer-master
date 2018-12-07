@@ -46,7 +46,7 @@ http.createServer(function(request, response) {
   
    }
   if(request.url==="/favicon.ico") return;
-  if(request.url==="/a") {    var raw = fs.createReadStream('2.html');   raw.pipe(response);                      return;}
+  if(request.url==="/a") {    var raw = fs.createReadStream('2.html');  response.setHeader('Content-Type', 'text/html');  raw.pipe(response);                      return;}
 
 
   response.end('hello world!');
