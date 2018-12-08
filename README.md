@@ -4,7 +4,7 @@ multer这个模块用了busboy这个模块来处理前台发送的上传数据  
 
 busboy的使用
 
-var Busboy = require('busboy')
+//var Busboy = require('busboy')
  if (!/multipart\/form-data/i.test(request.headers['content-type'])) {
                 return response.end('wrong');
             }
