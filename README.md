@@ -3,7 +3,6 @@
 multer这个模块用了busboy这个模块来处理前台发送的上传数据  enctype="multipart/form-data" 上传必须要设置的
 
 busboy的使用
-注意busboy这个模块只会处理上传类型的数据，并把数据转成 binary编码的buffter（固定编码的），所以你用writeFile时得先用toString转回来（encoding默认是用utf8转的），
 
 var Busboy = require('busboy')
  if (!/multipart\/form-data/i.test(request.headers['content-type'])) {
@@ -22,13 +21,13 @@ var Busboy = require('busboy')
                     writeStream.write(data);
 					
 				//a+=data 会破坏数据，就是buffter不能加等于buffter,大文件时会多次触发这里所以会加等于
-				a+=data.toString('binary')
+				a+=data.toString('binary');//latin1编码和binary编码都可以处理ANSI编码
               
                 })
 
                 //监听end事件，文件数据接收完毕，关闭这个可写流
                 file.on('end', function (data) {
-				
+		//fs.writeFile('./xiaoben1.txt',Buffer.from(a, 'binary').toString('binary'),{encoding:'binary'},function(){})
 					fs.writeFile('./xiaoben1.png',a,{encoding:'binary'},function(){})   //encoding是类似于toString以什么的编码
                     writeStream.end();
                 });
