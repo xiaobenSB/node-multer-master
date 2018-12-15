@@ -4,6 +4,9 @@ multer这个模块用了busboy这个模块来处理前台发送的上传数据  
 
 busboy的使用
 
+on('file') 是响应文件形式的post数据
+on('field') 是响应键值形式的post数据
+
 var Busboy = require('busboy')
  if (!/multipart\/form-data/i.test(request.headers['content-type'])) {
                 return response.end('wrong');
