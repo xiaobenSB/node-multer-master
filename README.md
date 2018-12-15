@@ -3,10 +3,10 @@
 multer这个模块用了busboy这个模块来处理前台发送的上传数据  enctype="multipart/form-data" 上传必须要设置的
 
 busboy的使用
-
-on('file') 是响应文件形式的post数据
+<h3>
+on('file') 是响应文件形式的post数据  <br/>
 on('field') 是响应键值形式的post数据
-
+</h3>
 var Busboy = require('busboy')
  if (!/multipart\/form-data/i.test(request.headers['content-type'])) {
                 return response.end('wrong');
