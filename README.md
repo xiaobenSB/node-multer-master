@@ -1,5 +1,5 @@
 文件保存的编码是用文件的源编码，不管你怎么对数据进行修改（编码）
-
+ie8上传数据的话只能用form表单提交
 multer这个模块用了busboy这个模块来处理前台发送的上传数据  enctype="multipart/form-data" 上传必须要设置的
 
 busboy的使用
