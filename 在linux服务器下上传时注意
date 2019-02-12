@@ -23,7 +23,7 @@ mysql('INSERT INTO think_xiaoben(username,passworld,imgUrl) VALUES(?,?,?)',[user
             
            
            
-在使用 var ws = fs.createwritestream('xx') 创建写入流方法时
+在使用 var ws = fs.createwritestream('xx') 创建写入流方法时，大多node上传框架都是以数据流方式写入的，所以我用框架不行
 
 req.on('data',function(chunk){
 
