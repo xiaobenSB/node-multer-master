@@ -1,0 +1,36 @@
+
+这是在我使用的linux服务器才会发生，不知其他liunx会不会这样
+
+
+在使用数据库时
+
+fs.writeFile('./public/Angular-NG-ZORRO/upload/'+imgName,dataarr[1],{encoding:'latin1'},function(){});  
+
+//数据库前面不得使用fs方法的文件（包括文件流写入）写入,因为会导致下面数据库语句不成功，不知是什么原因。
+
+mysql('INSERT INTO think_xiaoben(username,passworld,imgUrl) VALUES(?,?,?)',[username,passworld,imgName],function(err,result,field){
+							   if(err) {   res.setHeader('Content-Type', 'text/plain;charset=utf8'); res.writeHead(404);  res.end("注册失败！账号已存在");  return;}
+							fs.writeFile('./public/Angular-NG-ZORRO/upload/'+imgName,dataarr[1],{encoding:'latin1'},function(){});
+							
+              //得写在数据库执行完成后
+              
+							res.setHeader('Content-Type', 'text/plain;charset=utf8');
+							res.writeHead(200);
+
+							res.end("注册成功!可以点击登陆进行登陆啦");
+						   // console.log(222);
+					  });
+            
+           
+           
+在使用 var ws = fs.createwritestream('xx') 创建写入流方法时
+
+req.on('data',function(chunk){
+
+     ws.write(chunk.slice(start,end)) ;   //这样在liunx下会导致下面得req.on(end,function(){})里的方法不执行,数据也获取不完整，也不知是什么原因，可能数据过大还是什么
+
+    得使用： data += chunk.toString('latin1');   //这样就会触发end并获取完整数据
+
+})
+
+req.on('end',function(){   });
