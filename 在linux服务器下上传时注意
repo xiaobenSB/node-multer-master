@@ -34,3 +34,73 @@ req.on('data',function(chunk){
 })
 
 req.on('end',function(){   });
+
+
+
+解决方法如下：
+
+
+var imgName = null;
+			var username = '';
+			var passworld = '';
+			
+			var data = '';
+			var file = '';
+			var fileFlag = false;
+			
+			req.on('data' , function(chunk){
+			   data += chunk.toString('latin1');
+			});    
+
+			req.on("end",function(){
+						
+						var dataarr = data.split(/\r\n\r\n/);
+
+						for(var i = 0;i<dataarr.length;i++){
+						    if(dataarr[i].match(/name=".*"/)){
+							//dataarr[i].match(/name=".*"/)[0].split('"')[1] == 'fname' ? username = console.log(dataarr[i+1].split('\r\n')[0],'latin1') : passworld = Buffer.from(dataarr[i+1].split('\r\n')[0],'latin1').toString('utf8');
+								switch(dataarr[i].match(/name=".*"/)[0].split('"')[1])
+									{
+									case 'fname':
+										  username = Buffer.from(dataarr[i+1].split('\r\n')[0],'latin1').toString('utf8');
+										  if(fileFlag) fileFlag = false;
+									  break;
+									case 'lname':
+										  passworld = Buffer.from(dataarr[i+1].split('\r\n')[0],'latin1').toString('utf8');
+										  if(fileFlag) fileFlag = false;
+									  break;
+									default:
+									  if(dataarr[i].match(/filename=".*"/)){
+											imgName = new Date().getTime() + '.' + dataarr[i].match(/filename=".*"/)[0].split('"')[1].split('.')[1];	
+                                            fileFlag = true;											
+											};	
+									}
+							}
+							
+							if(fileFlag){
+								file += dataarr[i+1];
+							}
+			 
+						}
+						fs.writeFile('./public/'+imgName,file,{encoding:'latin1'},function(){});
+						console.log(username,passworld,imgName)
+
+				 /*    mysql('INSERT INTO think_xiaoben(username,passworld,imgUrl) VALUES(?,?,?)',[username,passworld,imgName],function(err,result,field){
+							   if(err) {   res.setHeader('Content-Type', 'text/plain;charset=utf8'); res.writeHead(404);  res.end("注册失败！账号已存在");  return;}
+							if(imgName)fs.writeFile('./public/Angular-NG-ZORRO/upload/'+imgName,file,{encoding:'latin1'},function(){});
+							
+							res.setHeader('Content-Type', 'text/plain;charset=utf8');
+							res.writeHead(200);
+
+							res.end("注册成功!可以点击登陆进行登陆啦");
+						   // console.log(222);
+					  });*/
+					  res.end('ok');
+					
+			});
+
+
+
+
+
+
